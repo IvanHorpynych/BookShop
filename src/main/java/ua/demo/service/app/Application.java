@@ -15,7 +15,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 @SpringBootApplication
 @ComponentScan(basePackages = "ua.demo.service")
 @EnableJpaRepositories(basePackages = "ua.demo.service.repositories")
-@EntityScan(basePackages = "ua.demo.service.models")
+@EntityScan(basePackages = "ua.demo.service.entity.models")
 
 public class Application extends WebMvcConfigurerAdapter {
 

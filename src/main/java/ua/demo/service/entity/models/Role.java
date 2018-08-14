@@ -1,4 +1,4 @@
-package ua.demo.service.models;
+package ua.demo.service.entity.models;
 
 
 public enum Role {

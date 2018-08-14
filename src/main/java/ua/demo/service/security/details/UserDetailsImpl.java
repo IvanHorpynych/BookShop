@@ -3,7 +3,7 @@ package ua.demo.service.security.details;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-import ua.demo.service.models.User;
+import ua.demo.service.entity.models.User;
 
 import java.util.Collection;
 import java.util.Collections;

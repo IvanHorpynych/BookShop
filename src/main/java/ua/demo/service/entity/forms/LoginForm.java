@@ -1,4 +1,4 @@
-package ua.demo.service.forms;
+package ua.demo.service.entity.forms;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

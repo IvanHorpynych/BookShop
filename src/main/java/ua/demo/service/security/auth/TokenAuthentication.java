@@ -1,4 +1,4 @@
-package ua.demo.service.security.token;
+package ua.demo.service.security.auth;
 
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;

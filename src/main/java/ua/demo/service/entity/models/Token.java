@@ -1,4 +1,4 @@
-package ua.demo.service.models;
+package ua.demo.service.entity.models;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

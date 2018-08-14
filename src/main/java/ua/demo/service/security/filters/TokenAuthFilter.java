@@ -2,7 +2,7 @@ package ua.demo.service.security.filters;
 
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
-import ua.demo.service.security.token.TokenAuthentication;
+import ua.demo.service.security.auth.TokenAuthentication;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -20,7 +20,7 @@ public class TokenAuthFilter implements Filter {
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest)servletRequest;
 
-        String token = request.getParameter("token");
+        String token = request.getHeader("token");
 
         TokenAuthentication tokenAuthentication = new TokenAuthentication(token);
         if (token == null) {

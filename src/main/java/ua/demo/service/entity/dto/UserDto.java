@@ -1,10 +1,10 @@
-package ua.demo.service.transfer;
+package ua.demo.service.entity.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import ua.demo.service.models.User;
+import ua.demo.service.entity.models.User;
 
 import java.util.List;
 import java.util.stream.Collectors;

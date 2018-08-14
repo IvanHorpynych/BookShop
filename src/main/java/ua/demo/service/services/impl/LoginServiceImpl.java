@@ -1,21 +1,21 @@
-package ua.demo.service.services;
+package ua.demo.service.services.impl;
 
 import org.apache.commons.lang.RandomStringUtils;
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.stereotype.Component;
-import ua.demo.service.forms.LoginForm;
-import ua.demo.service.models.Token;
-import ua.demo.service.models.User;
+import org.springframework.stereotype.Service;
+import ua.demo.service.entity.forms.LoginForm;
+import ua.demo.service.entity.models.Token;
+import ua.demo.service.entity.models.User;
 import ua.demo.service.repositories.TokensRepository;
 import ua.demo.service.repositories.UsersRepository;
-import ua.demo.service.transfer.TokenDto;
+import ua.demo.service.entity.dto.TokenDto;
+import ua.demo.service.services.LoginService;
 
 import java.util.Optional;
 
 
-@Component
+@Service
 public class LoginServiceImpl implements LoginService {
 
     @Autowired
@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public TokenDto login(LoginForm loginForm) {
-        Optional<User> userCandidate = usersRepository.findOneByLogin(loginForm.getLogin());
+        Optional<User> userCandidate = usersRepository.findUserByLogin(loginForm.getLogin());
 
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();
