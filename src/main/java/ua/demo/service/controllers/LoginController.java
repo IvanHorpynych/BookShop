@@ -30,7 +30,7 @@ public class LoginController {
     @DeleteMapping("/logout")
     public ResponseEntity<Object> logout(@RequestHeader("token") TokenDto tokenDto) {
 
-        Optional<Token> tokenCandidate = tokenService.findByValue(tokenDto.getValue());
+        Optional<Token> tokenCandidate = tokenService.findByValue(tokenDto.getToken());
 
         if (tokenCandidate.isPresent()) {
             tokenService.deleteAllByUser(tokenCandidate.get().getUser());

@@ -12,7 +12,7 @@ import ua.demo.service.entity.models.Token;
 @AllArgsConstructor
 public class TokenDto {
 
-    private String value;
+    private String token;
 
     public static TokenDto from(Token token) {
         return new TokenDto(token.getValue());

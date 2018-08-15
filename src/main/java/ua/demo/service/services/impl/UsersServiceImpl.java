@@ -5,6 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import ua.demo.service.entity.models.Role;
 import ua.demo.service.entity.models.User;
+import ua.demo.service.exceptions.NotAvailableLoginException;
 import ua.demo.service.repositories.UsersRepository;
 import ua.demo.service.services.UsersService;
 
@@ -26,8 +27,10 @@ public class UsersServiceImpl implements UsersService {
     public void signUp(User user) {
         String hashPassword = passwordEncoder.encode(user.getHashPassword());
 
+        if(usersRepository.findUserByLogin(user.getLogin()).isPresent()){
+            throw new NotAvailableLoginException();
+        }
         user.setHashPassword(hashPassword);
-        user.setRole(Role.USER);
         user.setEarnedMoney(BigDecimal.ZERO);
 
         usersRepository.save(user);

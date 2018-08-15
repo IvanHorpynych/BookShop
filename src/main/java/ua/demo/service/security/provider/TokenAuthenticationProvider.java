@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import ua.demo.service.entity.models.Token;
+import ua.demo.service.exceptions.InvalidTokenException;
 import ua.demo.service.repositories.TokensRepository;
 import ua.demo.service.security.auth.TokenAuthentication;
 
@@ -34,7 +35,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider{
             tokenAuthentication.setUserDetails(userDetails);
             tokenAuthentication.setAuthenticated(true);
             return tokenAuthentication;
-        } else throw new IllegalArgumentException("Illegal token");
+        } else throw new InvalidTokenException();
     }
 
     @Override

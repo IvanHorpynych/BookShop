@@ -42,7 +42,7 @@ public class User {
 
     @Enumerated(value = EnumType.STRING)
     @JsonProperty(required = true)
-    private Role role;
+    private Role role = Role.USER;
 
     @JsonIgnore
     public String getHashPassword() {

@@ -7,6 +7,7 @@ import ua.demo.service.entity.dto.TokenDto;
 import ua.demo.service.entity.models.Book;
 import ua.demo.service.entity.models.DataWrapper;
 import ua.demo.service.entity.models.User;
+import ua.demo.service.exceptions.InvalidTokenException;
 import ua.demo.service.services.BookService;
 import ua.demo.service.services.BasketService;
 import ua.demo.service.services.TokenService;
@@ -31,8 +32,8 @@ public class BasketServiceImpl implements BasketService {
     @Override
     public DataWrapper getFrontData(TokenDto token) {
         return DataWrapper.builder()
-                .currentUser(tokenService.findByValue(token.getValue())
-                        .orElseThrow(IllegalArgumentException::new).getUser())
+                .currentUser(tokenService.findByValue(token.getToken())
+                        .orElseThrow(InvalidTokenException::new).getUser())
                 .allowedBooks(bookService.findAll()).build();
     }
 
@@ -66,7 +67,7 @@ public class BasketServiceImpl implements BasketService {
         else updatedBooks = new ArrayList<>(books.values());
 
         User user = tokenService.findByValue(
-                tokenDto.getValue()).get().getUser();
+                tokenDto.getToken()).get().getUser();
 
         user.setEarnedMoney(user.getEarnedMoney().add(earnedMoney));
 

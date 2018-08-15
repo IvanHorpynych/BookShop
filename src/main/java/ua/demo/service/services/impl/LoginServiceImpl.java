@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import ua.demo.service.entity.forms.LoginForm;
 import ua.demo.service.entity.models.Token;
 import ua.demo.service.entity.models.User;
+import ua.demo.service.exceptions.UserNotFoundException;
 import ua.demo.service.repositories.TokensRepository;
 import ua.demo.service.repositories.UsersRepository;
 import ua.demo.service.entity.dto.TokenDto;
@@ -37,12 +38,12 @@ public class LoginServiceImpl implements LoginService {
             if (passwordEncoder.matches(loginForm.getPassword(), user.getHashPassword())) {
                 Token token = Token.builder()
                         .user(user)
-                        .value(RandomStringUtils.random(10, true, true))
+                        .value(RandomStringUtils.random(20, true, true))
                         .build();
 
                 tokensRepository.save(token);
                 return TokenDto.from(token);
             }
-        } throw new IllegalArgumentException("User not found");
+        } throw new UserNotFoundException();
     }
 }

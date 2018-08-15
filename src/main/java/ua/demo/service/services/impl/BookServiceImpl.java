@@ -48,7 +48,7 @@ public class BookServiceImpl implements BookService {
     public DataWrapper addBook(Book book, TokenDto tokenDto) {
 
         User user = tokenService.findByValue(
-                tokenDto.getValue()).get().getUser();
+                tokenDto.getToken()).get().getUser();
 
         save(book);
 

@@ -28,9 +28,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticationProvider(authenticationProvider)
                 .authorizeRequests()
                 .antMatchers("/login/**").permitAll()
-                .antMatchers("/users/**").hasAuthority("USER")
-                .antMatchers("/admin/**").hasAuthority("ADMIN")
+                .antMatchers("/buy/**").hasAuthority("USER")
+                .antMatchers("/addBook/**").hasAuthority("ADMIN")
+                .antMatchers("/list/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/logout/**").hasAnyAuthority("USER","ADMIN");
         http.csrf().disable();
+        http.headers().frameOptions().disable();
     }
 }
