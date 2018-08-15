@@ -6,9 +6,6 @@ import org.springframework.web.bind.annotation.*;
 import ua.demo.service.entity.models.User;
 import ua.demo.service.services.UsersService;
 
-import java.util.List;
-
-import static ua.demo.service.entity.dto.UserDto.from;
 
 
 @RestController

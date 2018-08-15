@@ -6,46 +6,34 @@ import ua.demo.service.entity.dto.TokenDto;
 import ua.demo.service.entity.models.Book;
 import ua.demo.service.entity.models.DataWrapper;
 import ua.demo.service.services.BookService;
-import ua.demo.service.services.FrontMetaDataService;
-import ua.demo.service.services.TokenService;
+import ua.demo.service.services.BasketService;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/list")
 public class ShopFrontController {
-
-    @Autowired
-    private TokenService tokenService;
 
     @Autowired
     private BookService bookService;
 
 
     @Autowired
-    FrontMetaDataService frontMetaDataService;
+    BasketService basketService;
 
     @GetMapping("/list")
     public DataWrapper getFrontData(@RequestHeader("token") TokenDto tokenDto) {
-        return frontMetaDataService.getFrontData(tokenDto);
+        return basketService.getFrontData(tokenDto);
     }
 
-    @PostMapping("/list/buy")
+    @PostMapping("/buy")
     public DataWrapper buyBooks(@RequestHeader("token") TokenDto tokenDto, @RequestBody List<Long> booksInBasket) {
-        return frontMetaDataService.buyBooks(booksInBasket, tokenDto);
+        return basketService.makePurchase(booksInBasket, tokenDto);
+    }
+
+    @PostMapping("/addBook")
+    public DataWrapper addBook(@RequestHeader("token") TokenDto tokenDto, @RequestBody Book book){
+        return bookService.addBook(book, tokenDto);
     }
 
 
-
-    /*@DeleteMapping("/logout")
-    public ResponseEntity<Object> logout(@RequestHeader("token") TokenDto tokenDto) {
-
-        Optional<Token> tokenCandidate = tokenService.findByValue(tokenDto.getValue());
-
-        if (tokenCandidate.isPresent()) {
-            tokenService.deleteAllByUser(tokenCandidate.get().getUser());
-            return ResponseEntity.ok("Correct logout");
-        }
-        return ResponseEntity.badRequest().build();
-    }*/
 }

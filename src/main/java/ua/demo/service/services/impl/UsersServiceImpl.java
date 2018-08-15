@@ -47,4 +47,10 @@ public class UsersServiceImpl implements UsersService {
     public Optional<User> findOneById(Long id) {
         return usersRepository.findUserById(id);
     }
+
+    @Override
+    public User save(User user) {
+        return usersRepository.save(user);
+    }
+
 }
