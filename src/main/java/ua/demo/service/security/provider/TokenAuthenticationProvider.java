@@ -31,7 +31,7 @@ public class TokenAuthenticationProvider implements AuthenticationProvider{
         Optional<Token> tokenCandidate = tokensRepository.findOneByValue(tokenAuthentication.getName());
 
         if (tokenCandidate.isPresent()) {
-            UserDetails userDetails = userDetailsService.loadUserByUsername(tokenCandidate.get().getUser().getLogin());
+            UserDetails userDetails = userDetailsService.loadUserByUsername(tokenCandidate.get().getUser().getEmail());
             tokenAuthentication.setUserDetails(userDetails);
             tokenAuthentication.setAuthenticated(true);
             return tokenAuthentication;

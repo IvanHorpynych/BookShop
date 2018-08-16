@@ -30,7 +30,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public TokenDto login(LoginForm loginForm) {
-        Optional<User> userCandidate = usersRepository.findUserByLogin(loginForm.getLogin());
+        Optional<User> userCandidate = usersRepository.findUserByEmail(loginForm.getEmail());
 
         if (userCandidate.isPresent()) {
             User user = userCandidate.get();

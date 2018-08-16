@@ -4,4 +4,5 @@ public abstract class Constants {
     public static final String ERROR_HEADER = "error-message";
     public static final String INTERNAL_ERROR = "Internal error";
     public static final String JSON_FORMAT_ERROR = "Error in JSON format";
+    public static final String INVALID_REGEX_VALIDATION = "Invalid regex validation";
 }

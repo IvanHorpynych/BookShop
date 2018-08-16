@@ -11,6 +11,7 @@ import ua.demo.service.services.BasketService;
 import java.util.List;
 
 @RestController
+@CrossOrigin(allowedHeaders = "*",exposedHeaders = "error-message")
 public class ShopFrontController {
 
     @Autowired

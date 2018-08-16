@@ -1,6 +1,7 @@
 package ua.demo.service.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ua.demo.service.entity.forms.LoginForm;
@@ -13,6 +14,7 @@ import java.util.Optional;
 
 
 @RestController
+@CrossOrigin(allowedHeaders = "*",exposedHeaders = "error-message")
 public class LoginController {
 
     @Autowired

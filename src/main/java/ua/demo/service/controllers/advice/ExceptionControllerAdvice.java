@@ -6,9 +6,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import ua.demo.service.exceptions.Constants;
 import ua.demo.service.exceptions.InvalidTokenException;
-import ua.demo.service.exceptions.NotAvailableLoginException;
+import ua.demo.service.exceptions.NotAvailableEmailException;
 import ua.demo.service.exceptions.UserNotFoundException;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class ExceptionControllerAdvice {
@@ -30,16 +31,22 @@ public class ExceptionControllerAdvice {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, Constants.JSON_FORMAT_ERROR).build();
     }
 
-    @ExceptionHandler(NotAvailableLoginException.class)
-    public ResponseEntity<?> handleNotAvailableLoginException(HttpServletRequest request, Exception ex) {
+    @ExceptionHandler(NotAvailableEmailException.class)
+    public ResponseEntity<?> handleNotAvailableEmailException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, ex.getMessage()).build();
     }
 
-    @ExceptionHandler(Throwable.class)
+    /*@ExceptionHandler(ConstraintViolationException.class)
+    public ResponseEntity<?> handleConstraintViolationException(HttpServletRequest request, Exception ex) {
+        return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, Constants.INVALID_REGEX_VALIDATION).build();
+
+    }*/
+
+    /*@ExceptionHandler(Throwable.class)
     public ResponseEntity<?> handleGeneralException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, Constants.INTERNAL_ERROR).build();
 
-    }
+    }*/
 
     /*@ModelAttribute
     public void setAccessControlResponseHeader(HttpServletResponse response) {

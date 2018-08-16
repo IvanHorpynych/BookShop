@@ -16,12 +16,12 @@ import java.util.stream.Collectors;
 @Builder
 public class UserDto {
     private Long id;
-    private String login;
+    private String email;
 
     public static UserDto from(User user) {
         return UserDto.builder()
                 .id(user.getId())
-                .login(user.getLogin())
+                .email(user.getEmail())
                 .build();
     }
 

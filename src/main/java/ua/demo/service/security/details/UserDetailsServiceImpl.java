@@ -15,10 +15,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UsersRepository usersRepository;
 
     @Override
-    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         return new
-                UserDetailsImpl(usersRepository.findUserByLogin(login)
+                UserDetailsImpl(usersRepository.findUserByEmail(email)
                 .orElseThrow(IllegalArgumentException::new));
     }
 }

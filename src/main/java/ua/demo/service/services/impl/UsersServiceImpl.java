@@ -3,9 +3,8 @@ package ua.demo.service.services.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import ua.demo.service.entity.models.Role;
 import ua.demo.service.entity.models.User;
-import ua.demo.service.exceptions.NotAvailableLoginException;
+import ua.demo.service.exceptions.NotAvailableEmailException;
 import ua.demo.service.repositories.UsersRepository;
 import ua.demo.service.services.UsersService;
 
@@ -27,8 +26,8 @@ public class UsersServiceImpl implements UsersService {
     public void signUp(User user) {
         String hashPassword = passwordEncoder.encode(user.getHashPassword());
 
-        if(usersRepository.findUserByLogin(user.getLogin()).isPresent()){
-            throw new NotAvailableLoginException();
+        if(usersRepository.findUserByEmail(user.getEmail()).isPresent()){
+            throw new NotAvailableEmailException();
         }
         user.setHashPassword(hashPassword);
         user.setEarnedMoney(BigDecimal.ZERO);
@@ -42,8 +41,8 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public Optional<User> findOneByLogin(String login) {
-        return usersRepository.findUserByLogin(login);
+    public Optional<User> findOneByEmail(String email) {
+        return usersRepository.findUserByEmail(email);
     }
 
     @Override

@@ -9,6 +9,7 @@ import ua.demo.service.services.UsersService;
 
 
 @RestController
+@CrossOrigin(allowedHeaders = "*",exposedHeaders = "error-message")
 public class UsersController {
 
 

@@ -24,16 +24,14 @@ public class User {
 
     @NotNull
     @Pattern(regexp = RegexMappings.NAME_SURNAME_REGEX)
-    private String firstName;
+    private String name;
 
     @NotNull
-    @Pattern(regexp = RegexMappings.NAME_SURNAME_REGEX)
-    private String lastName;
+    @Pattern(regexp = RegexMappings.EMAIL_REGEX)
+    private String email;
 
     @NotNull
-    private String login;
-
-    @NotNull
+    @JsonProperty("password")
     private String hashPassword;
 
     @NotNull
