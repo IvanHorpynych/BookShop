@@ -31,7 +31,6 @@ public class User {
     private String email;
 
     @NotNull
-    @JsonProperty("password")
     private String hashPassword;
 
     @NotNull
@@ -47,7 +46,7 @@ public class User {
         return hashPassword;
     }
 
-    @JsonProperty
+    @JsonProperty("password")
     public void setHashPassword(String hashPassword) {
         this.hashPassword = hashPassword;
     }

@@ -15,7 +15,7 @@ import javax.validation.ConstraintViolationException;
 public class ExceptionControllerAdvice {
 
 
-    @ExceptionHandler(InvalidTokenException.class)
+    /*@ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<?> handleInvalidTokenException(HttpServletRequest request, Exception ex){
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, ex.getMessage()).build();
     }
@@ -34,7 +34,7 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(NotAvailableEmailException.class)
     public ResponseEntity<?> handleNotAvailableEmailException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, ex.getMessage()).build();
-    }
+    }*/
 
     /*@ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> handleConstraintViolationException(HttpServletRequest request, Exception ex) {

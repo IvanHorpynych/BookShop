@@ -2,6 +2,7 @@ package ua.demo.service.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -30,6 +31,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login/**").permitAll()
                 .antMatchers("/buy/**").hasAuthority("USER")
                 .antMatchers("/addBook/**").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.OPTIONS,"/list/**").permitAll()
                 .antMatchers("/list/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/logout/**").hasAnyAuthority("USER","ADMIN");
         http.csrf().disable();

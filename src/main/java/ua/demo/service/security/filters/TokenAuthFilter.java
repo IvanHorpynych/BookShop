@@ -18,16 +18,18 @@ public class TokenAuthFilter implements Filter {
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest)servletRequest;
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
 
         String token = request.getHeader("token");
 
         TokenAuthentication tokenAuthentication = new TokenAuthentication(token);
-        if (token == null) {
-            tokenAuthentication.setAuthenticated(false);
-        } else {
-            SecurityContextHolder.getContext().setAuthentication(tokenAuthentication);
-        }
+
+        if (!((HttpServletRequest) servletRequest).getMethod().equals("OPTIONS"))
+            if (token == null) {
+                tokenAuthentication.setAuthenticated(false);
+            } else {
+                SecurityContextHolder.getContext().setAuthentication(tokenAuthentication);
+            }
         filterChain.doFilter(servletRequest, servletResponse);
     }
 
