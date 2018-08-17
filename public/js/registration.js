@@ -1,11 +1,12 @@
+var corsurl = "http://localhost";
 function register() {
-    var url = 'http://localhost/signup';
+    var url = corsurl+'/signup';
     var user = {
         name: document.getElementById('name').value,
         email: document.getElementById('email').value,
-        password: document.getElementById('password').value
+        password: document.getElementById('password').value,
+        role: document.getElementById('role').value
     };
-
     $.ajax({
         type: 'POST',
         url: url,
@@ -17,6 +18,7 @@ function register() {
             window.location = '/registration.html';
         },
         error: function (request, textStatus, errorThrown) {
+            $("#registration-alert").show();
             document.getElementById('error-message').textContent= request.getResponseHeader('error-message');
         }
     });

@@ -1,0 +1,21 @@
+.table td {
+    text-align: center;
+}
+
+.table th {
+    text-align: center;
+}
+
+.basket-info{
+    text-align: center;
+}
+
+.basket-button{
+    float: right;
+}
+
+.btn-link {
+    color: #000000;
+    margin-top: 20%;
+}
+

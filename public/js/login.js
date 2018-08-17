@@ -1,8 +1,9 @@
+var corsurl = "http://localhost";
 function login() {
-    var url = 'http://localhost/login';
+    var url = corsurl+'/login';
     var userData = {
         email: document.getElementById('login-email').value,
-        password: document.getElementById('login-password').value
+        password: document.getElementById('login-password').value,
     };
 
     $.ajax({
@@ -19,6 +20,7 @@ function login() {
             }
         },
         error: function (request, textStatus, errorThrown) {
+            $("#registration-alert").show();
             document.getElementById('error-message').textContent= request.getResponseHeader('error-message');
         }
     });

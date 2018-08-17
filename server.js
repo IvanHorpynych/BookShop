@@ -21,5 +21,6 @@ app.get('/shopfront.html', function(req, res, next) {
 
 app.use(express.static('public'));
 
+
 app.listen(666);
 console.log("StaticServer started...");

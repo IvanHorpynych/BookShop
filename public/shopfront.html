@@ -1,24 +1,82 @@
 <!DOCTYPE html>
 <html lang="en">
-<script src="js/shopfront.js"></script>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body onload="getData()">
-<table id="books">
-    <th>Id</th>
-    <th>Name</th>
-    <th>Price</th>
-    <th>Times Bought</th>
-</table>
-<table id="user">
-    <th>Name</th>
-    <th>Earned Money</th>
-</table>
-<script>
-</script>
+    <title>Book Shop</title>
+    <link href="css/custom.css" rel="stylesheet">
+    <link href="css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link href="css/navbar-default.css" rel="stylesheet">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="js/shopfront.js"></script>
 
+</head>
+<body onload=setData()>
+<div class="container" style="padding-top: 2%">
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand fas fa-credit-card" href="">&nbspBookShop</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li>
+                    <a id="user-name"></a>
+                </li>
+                <li>
+                    <a id="user-earned-money"></a>
+                </li>
+                <li>
+                    <button onclick="logout()" class="btn-link">Logout</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+
+    <div class="container">
+        <div class="row col-md-12">
+            <table class="table table-hover" id="books">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Price</th>
+                    <th scope="col">Times Bought</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row col-md-12">
+            <h1 class="basket-info">BASKET</h1>
+            <div id="basket_content"></div>
+            <button id="clear_basket" class="basket-button btn btn-danger">Clean</button>
+            <button id="checkout" class="basket-button btn btn-info">Checkout</button>
+        </div>
+    </div>
+
+
+    <div id="new-book">
+        <h1 class="basket-info">ADD NEW BOOK</h1>
+        <div class="col-md-5">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Enter name:</b>
+                    <input name="bookName" type="text" class="form-control" id="bookName" placeholder="Name">
+                </li>
+                <li class="list-group-item"><b>Enter price:</b>
+                    <input type="number" id="bookPrice" name="bookPrice" class="form-control" placeholder="Price" step="0.0001"/>
+                </li>
+                <li class="list-group-item text-right">
+                    <input type="hidden" name="command" value="payment.do"/>
+                    <button name="add-book" id="add-book" value="" class="form-control btn btn-info">Add new</button>
+                </li>
+            </ul>
+
+    </div>
 </body>
 </html>
