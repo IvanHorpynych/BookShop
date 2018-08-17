@@ -3,6 +3,7 @@ package ua.demo.service.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import ua.demo.service.entity.dto.TokenDto;
+import ua.demo.service.entity.forms.OrderForm;
 import ua.demo.service.entity.models.Book;
 import ua.demo.service.entity.models.DataWrapper;
 import ua.demo.service.services.BookService;
@@ -27,7 +28,7 @@ public class ShopFrontController {
     }
 
     @PostMapping("/buy")
-    public DataWrapper buyBooks(@RequestHeader("token") TokenDto tokenDto, @RequestBody List<Long> booksInBasket) {
+    public DataWrapper buyBooks(@RequestHeader("token") TokenDto tokenDto, @RequestBody List<OrderForm> booksInBasket) {
         return basketService.makePurchase(booksInBasket, tokenDto);
     }
 

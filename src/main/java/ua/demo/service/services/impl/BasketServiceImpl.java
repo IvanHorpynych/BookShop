@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ua.demo.service.entity.dto.TokenDto;
+import ua.demo.service.entity.forms.OrderForm;
 import ua.demo.service.entity.models.Book;
 import ua.demo.service.entity.models.DataWrapper;
 import ua.demo.service.entity.models.User;
@@ -39,32 +40,24 @@ public class BasketServiceImpl implements BasketService {
 
     @Override
     @Transactional
-    public DataWrapper makePurchase(List<Long> booksInBasket, TokenDto tokenDto) {
-        Map<Long, Book> books = new HashMap<>(new HashSet<>(booksInBasket).size(),1);
+    public DataWrapper makePurchase(List<OrderForm> booksInBasket, TokenDto tokenDto) {
         Optional<Book> bookOpt;
+        List<Book> updatedBooks = new LinkedList<>();
         Book tempBook;
         BigDecimal earnedMoney = BigDecimal.ZERO;
 
-        for (long id : booksInBasket) {
-            if (books.containsKey(id)) {
-                tempBook = books.get(id);
-                tempBook.incrementTimesBought();
-                earnedMoney = earnedMoney.add(tempBook.getPrice());
-            } else {
-                bookOpt = bookService.findById(id);
-                if (bookOpt.isPresent()) {
-                    tempBook = bookOpt.get();
-                    books.put(id, tempBook);
-                    tempBook.incrementTimesBought();
-                    earnedMoney = earnedMoney.add(tempBook.getPrice());
-                }
+        for (OrderForm bookOrder : booksInBasket) {
+            bookOpt = bookService.findById(bookOrder.getId());
+            if (bookOpt.isPresent()) {
+                tempBook = bookOpt.get();
+                tempBook.setTimesBought(tempBook.getTimesBought()+bookOrder.getCount());
+                earnedMoney = earnedMoney.add(tempBook.getPrice().multiply(BigDecimal.valueOf(bookOrder.getCount())));
+                updatedBooks.add(tempBook);
             }
         }
 
-        List<Book> updatedBooks;
         if (!earnedMoney.equals(BigDecimal.ZERO))
-            updatedBooks = bookService.save(new ArrayList<>(books.values()));
-        else updatedBooks = new ArrayList<>(books.values());
+           bookService.save(updatedBooks);
 
         User user = tokenService.findByValue(
                 tokenDto.getToken()).get().getUser();
@@ -73,7 +66,7 @@ public class BasketServiceImpl implements BasketService {
 
 
         return DataWrapper.builder()
-                .allowedBooks(updatedBooks)
+                .allowedBooks(bookService.findAll())
                 .currentUser(usersService.save(user))
                 .build();
 

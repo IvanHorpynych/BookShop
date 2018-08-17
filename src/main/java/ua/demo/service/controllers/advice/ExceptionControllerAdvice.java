@@ -15,7 +15,7 @@ import javax.validation.ConstraintViolationException;
 public class ExceptionControllerAdvice {
 
 
-    /*@ExceptionHandler(InvalidTokenException.class)
+    @ExceptionHandler(InvalidTokenException.class)
     public ResponseEntity<?> handleInvalidTokenException(HttpServletRequest request, Exception ex){
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, ex.getMessage()).build();
     }
@@ -34,19 +34,19 @@ public class ExceptionControllerAdvice {
     @ExceptionHandler(NotAvailableEmailException.class)
     public ResponseEntity<?> handleNotAvailableEmailException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, ex.getMessage()).build();
-    }*/
+    }
 
-    /*@ExceptionHandler(ConstraintViolationException.class)
+    @ExceptionHandler(ConstraintViolationException.class)
     public ResponseEntity<?> handleConstraintViolationException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, Constants.INVALID_REGEX_VALIDATION).build();
 
-    }*/
+    }
 
-    /*@ExceptionHandler(Throwable.class)
+    @ExceptionHandler(Throwable.class)
     public ResponseEntity<?> handleGeneralException(HttpServletRequest request, Exception ex) {
         return ResponseEntity.badRequest().header(Constants.ERROR_HEADER, Constants.INTERNAL_ERROR).build();
 
-    }*/
+    }
 
     /*@ModelAttribute
     public void setAccessControlResponseHeader(HttpServletResponse response) {

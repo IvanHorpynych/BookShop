@@ -28,13 +28,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatcher("/**")
                 .authenticationProvider(authenticationProvider)
                 .authorizeRequests()
+                .antMatchers(HttpMethod.OPTIONS,"/**").permitAll()
                 .antMatchers("/login/**").permitAll()
-                .antMatchers("/buy/**").hasAuthority("USER")
                 .antMatchers("/addBook/**").hasAuthority("ADMIN")
-                .antMatchers(HttpMethod.OPTIONS,"/list/**").permitAll()
+                .antMatchers("/buy/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/list/**").hasAnyAuthority("USER","ADMIN")
                 .antMatchers("/logout/**").hasAnyAuthority("USER","ADMIN");
         http.csrf().disable();
+        http.logout().disable();
         http.headers().frameOptions().disable();
     }
 }
